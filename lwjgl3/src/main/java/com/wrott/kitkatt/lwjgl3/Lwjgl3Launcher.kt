@@ -16,7 +16,7 @@ object Lwjgl3Launcher {
     }
 
     private val defaultConfiguration: Lwjgl3ApplicationConfiguration
-        private get() {
+        get() {
             val configuration = Lwjgl3ApplicationConfiguration()
             configuration.setTitle("Cyberpunk")
             configuration.setWindowedMode(640, 480)

@@ -47,3 +47,5 @@ jar {
 		file(archiveFile).setExecutable(true, false)
 	}
 }
+
+java.targetCompatibility = JavaVersion.VERSION_1_8
