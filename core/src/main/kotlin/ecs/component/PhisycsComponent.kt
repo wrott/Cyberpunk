@@ -9,7 +9,7 @@ import ktx.ashley.get
 import ktx.ashley.mapperFor
 import ktx.math.vec2
 
-class PhysicComponent(private val impulse: Vector2 = vec2()) : Component, Pool.Poolable {
+class PhysicComponent(val impulse: Vector2 = vec2()) : Component, Pool.Poolable {
     companion object {
         val mapper = mapperFor<PhysicComponent>()
         val tmpVec2 = vec2()

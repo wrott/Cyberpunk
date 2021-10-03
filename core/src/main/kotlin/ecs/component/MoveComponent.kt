@@ -7,17 +7,24 @@ import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-class MoveComponent : Component,  Pool.Poolable  {
+enum class MoveDirection {
+    NONE,
+    LEFT,
+    RIGHT,
+}
+
+class MoveComponent : Component, Pool.Poolable {
+    var direction = MoveDirection.NONE
+    var maxSpeed = 1f
+    var moveVelocity = 0f
+
+    override fun reset() {
+        direction = MoveDirection.NONE
+        moveVelocity = 0f
+        maxSpeed = 1f
+    }
+
     companion object {
         val mapper = mapperFor<MoveComponent>()
     }
-
-    val speed = Vector2()
-
-    override fun reset() {
-        TODO("Not yet implemented")
-    }
 }
-val Entity.moveCmp: MoveComponent
-    get() = this[MoveComponent.mapper]
-        ?: throw KotlinNullPointerException("Trying to access a move component which is null")

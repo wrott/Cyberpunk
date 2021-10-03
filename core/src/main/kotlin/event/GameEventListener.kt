@@ -1,4 +1,3 @@
 package com.wrott.kitkatt.event
 
-interface GameEventListener {
-}
+interface GameEventListener

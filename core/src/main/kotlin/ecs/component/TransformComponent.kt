@@ -3,26 +3,37 @@ package com.wrott.kitkatt.ecs.component
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-class TransformComponent : Component, Comparable<TransformComponent>, Pool.Poolable {
+class TransformComponent : Component, Pool.Poolable, Comparable<TransformComponent> {
+    val position = Vector3()
+    val prevPosition = Vector2()
+    val interpolatedPosition = Vector2()
+    val size = Vector2(1f, 1f)
+
+    fun moveImmediately(x: Float, y: Float) {
+        position.set(x, y, position.z)
+        prevPosition.set(x, y)
+        interpolatedPosition.set(x, y)
+    }
+
+    override fun reset() {
+        position.set(0f, 0f, 0f)
+        prevPosition.set(0f, 0f)
+        interpolatedPosition.set(0f, 0f)
+        size.set(1f, 1f)
+    }
+
+    override fun compareTo(other: TransformComponent): Int {
+        val zDiff = other.position.z.compareTo(position.z)
+        return if (zDiff == 0) other.position.y.compareTo(position.y) else zDiff
+    }
 
     companion object {
         val mapper = mapperFor<TransformComponent>()
     }
-    val bounds = Rectangle()
-
-    override fun compareTo(other: TransformComponent): Int {
-        TODO("Not yet implemented")
-    }
-
-    override fun reset() {
-        TODO("Not yet implemented")
-    }
 }
-
-val Entity.transfCmp: TransformComponent
-    get() = this[TransformComponent.mapper]
-        ?: throw KotlinNullPointerException("Trying to access a transform component which is null")

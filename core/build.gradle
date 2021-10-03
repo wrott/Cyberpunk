@@ -3,7 +3,7 @@ eclipse.project.name = appName + '-core'
 
 dependencies {
 	api "com.badlogicgames.gdx:gdx:$gdxVersion"
-	api "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
+	api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 	api "com.badlogicgames.ashley:ashley:$ashleyVersion"
 	api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
 	api "com.badlogicgames.box2dlights:box2dlights:$box2dlightsVersion"
@@ -32,5 +32,5 @@ dependencies {
 	api "io.github.libktx:ktx-math:$ktxMathVersion"
 	api "io.github.libktx:ktx-scene2d:$ktxScene2DVersion"
 	api "io.github.libktx:ktx-collections:$ktxCollectionsVersion"
-	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
 }
