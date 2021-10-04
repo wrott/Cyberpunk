@@ -1,8 +1,6 @@
 package com.wrott.kitkatt
 
 import com.badlogic.ashley.core.Engine
-import com.badlogic.gdx.Application
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -19,7 +17,7 @@ import ktx.log.logger
 class Game : KtxGame<KtxScreen>() {
     private val batch: Batch by lazy { SpriteBatch(512) }
     private val viewport: Viewport = FitViewport(16f, 9f)
-    private val ecsEngine: Engine by lazy { createDefaultEngine(batch, viewport, world, assets) }
+    val ecsEngine: Engine by lazy { createDefaultEngine(batch, viewport, world, assets) }
     private val world: World by lazy {
         World(earthGravity, true).apply {
             autoClearForces = false
@@ -28,10 +26,6 @@ class Game : KtxGame<KtxScreen>() {
     private val assets: AssetManager by lazy { AssetManager() }
 
     override fun create() {
-//        if (System.getProperty("dev-mode", "false") == "true") {
-//            Gdx.app.logLevel = Application.LOG_DEBUG
-//        }
-
         addScreen(MainScreen(ecsEngine, world))
         setScreen<MainScreen>()
     }
@@ -42,8 +36,6 @@ class Game : KtxGame<KtxScreen>() {
     }
 
     override fun dispose() {
-        LOG.debug { "Maximum sprites in batch: ${(batch as SpriteBatch).maxSpritesInBatch}" }
-
         batch.dispose()
         world.dispose()
         assets.dispose()

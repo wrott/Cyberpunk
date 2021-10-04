@@ -8,7 +8,7 @@ import com.wrott.kitkatt.ecs.component.AnimationComponent
 import com.wrott.kitkatt.ecs.component.AnimationType
 import ktx.ashley.get
 
-interface EntityState : State<Entity> {
+sealed interface EntityState : State<Entity> {
     private fun entityAi(entity: Entity): AIComponent {
         val ai = entity[AIComponent.mapper]
         requireNotNull(ai) { "AIComponent missing for entity '$entity'" }
@@ -54,10 +54,6 @@ abstract class AnimatedState(
     override fun enter(entity: Entity, ai: AIComponent) {
         val animation = entityAnimation(entity)
         animation.type = animationType
-        // it is important to set the stateTime here as well because
-        // the AnimationSystem is processed after the AISystem and therefore
-        // isAnimationFinished might return true although the animation was not even
-        // started yet
         animation.stateTime = 0f
     }
 }

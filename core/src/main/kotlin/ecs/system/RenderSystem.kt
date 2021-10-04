@@ -3,9 +3,7 @@ package com.wrott.kitkatt.ecs.system
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
 import com.badlogic.gdx.graphics.Camera
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.wrott.kitkatt.Game
@@ -48,8 +46,6 @@ class RenderSystem(
 
         render.sprite.run {
             setBounds(
-                // center texture on x-axis depending on texture region's width
-                // also, box2d position is always the center of an object but we need the left bottom corner
                 transform.interpolatedPosition.x - transform.size.x * 0.5f - render.offsetInPx.x * Game.UNIT_SCALE + (1.0f - width) * width * 0.5f,
                 transform.interpolatedPosition.y - transform.size.y * 0.5f - render.offsetInPx.y * Game.UNIT_SCALE * transform.size.y,
                 width,

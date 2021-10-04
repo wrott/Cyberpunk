@@ -15,13 +15,11 @@ class JumpSystem(
 ) : IteratingSystem(allOf(JumpComponent::class).get()) {
     private val gravityPerStep = Vector2()
 
-    // formula taken from: https://www.iforce2d.net/b2dtut/projected-trajectory
     private fun getJumpVelocity(desiredHeight: Float): Float {
         if (desiredHeight <= 0) {
             return 0f
         }
 
-        // do calculation in physic step time unit
         gravityPerStep.set(world.gravity).scl(Game.PHYSIC_TIME_STEP).scl(Game.PHYSIC_TIME_STEP)
 
         val a = 0.5f / gravityPerStep.y
@@ -30,7 +28,6 @@ class JumpSystem(
         val quadraticSolution1 = (-b - sqrt(b * b - 4 * a * desiredHeight)) / (2 * a)
         val quadraticSolution2 = (-b + sqrt(b * b - 4 * a * desiredHeight)) / (2 * a)
 
-        // convert result back to "per second"
         return if (quadraticSolution1 < 0) {
             quadraticSolution2 / Game.PHYSIC_TIME_STEP
         } else {

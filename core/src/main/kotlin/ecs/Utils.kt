@@ -9,8 +9,6 @@ import com.badlogic.gdx.utils.viewport.Viewport
 import com.wrott.kitkatt.ecs.system.*
 import ktx.assets.loadOnDemand
 
-class Utils
-
 fun createDefaultEngine(
     batch: Batch,
     viewport: Viewport,

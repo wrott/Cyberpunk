@@ -1,13 +1,8 @@
 package com.wrott.kitkatt.screen
 
 import com.badlogic.ashley.core.Engine
-import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.badlogic.gdx.assets.AssetManager
-import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.wrott.kitkatt.Game
@@ -25,7 +20,6 @@ class MainScreen(
 ) : KtxScreen {
     override fun show() {
         spawnPlayer()
-        spawnMage()
         spawnTerrain()
     }
 
@@ -56,31 +50,6 @@ class MainScreen(
                 maxSpeed = 4f
             }
             with<AIComponent> { state = PlayerState.Idle }
-        }
-    }
-
-    private fun spawnMage() {
-        engine.entity {
-            val transform = with<TransformComponent> {
-                moveImmediately(1.5f, 2f)
-            }
-            with<PhysicComponent> {
-                body = world.body(BodyDef.BodyType.DynamicBody) {
-                    position.set(transform.position.x, transform.position.y)
-                    fixedRotation = true
-                    box(transform.size.x, transform.size.y) {
-                        friction = 0f
-                        filter.categoryBits = Game.ENTITY_CATEGORY_CHARACTER
-                        filter.maskBits = Game.ENTITY_CATEGORY_TERRAIN
-                    }
-                }
-            }
-            with<AnimationComponent>()
-            with<RenderComponent>()
-            with<MoveComponent> {
-                maxSpeed = 2f
-            }
-           // with<AIComponent> { state = MageState.Idle }
         }
     }
 

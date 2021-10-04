@@ -1,10 +1,7 @@
 package com.wrott.kitkatt.ecs.component
 
 import com.badlogic.ashley.core.Component
-import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Pool
-import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 enum class MoveDirection {
